@@ -10,7 +10,7 @@ body {
 .container {
     max-width: 1280px;
     margin: auto;
-  
+
     background: #222a3d;
     padding: 20px;
     border-radius: 12px;
@@ -28,14 +28,14 @@ h1 {
     margin-bottom: 20px;
 }
 
-ul {
+.info__list {
     display: flex;
     flex-direction: column;
     list-style-type: none;
     padding: 0;
 }
 
-li {
+.info__item {
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
@@ -47,7 +47,7 @@ li {
     color: white;
 }
 
-li:hover {
+.info__item:hover {
     background-color: rgba(255, 255, 255, 0.9);
     transform: scale(1.02);
     cursor: pointer;
@@ -63,12 +63,67 @@ a {
 
 a:hover {
     text-decoration: underline;
-  
+
     /* Цвет ссылки при наведении */
 }
+
 .zag {
     color: #4DC3FA;
     font-size: 18px;
-   
-   
+
+
+}
+
+.coord__list {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.coord__listFlexC {
+    justify-content: space-between;
+}
+
+.coord__item {
+    flex: 0 0 calc(20% - 10px);
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    background: none;
+    color: #4DC3FA;
+    border: none;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #4DC3FA;
+    border-radius: 10px;
+}
+.coord__item:nth-child(4n) {
+    margin-right: 0;
+  }
+.coord__item:hover {
+    text-decoration: underline;
+}
+
+.boxMap {
+    width: 100%;
+}
+
+.map {
+    display: none;
+    width: 100%;
+    height: 600px;
+    margin: 10px 0;
+}
+
+.target__btn:focus {
+    text-decoration: underline;
+    color: white;
+    border: 1px solid white;
+}
+
+.coord__title {
+    text-align: center;
+    margin: 20px 0;
 }
