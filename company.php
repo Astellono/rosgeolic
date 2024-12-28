@@ -58,15 +58,7 @@ foreach ($polygons as $polygon) {
     </script>
     <script defer src="js/grad.js"></script>
     <script defer src="js/map.js"></script>
-    <!-- <script defer type="text/javascript">
-        ymaps.ready(init);
-        function init(){
-            var myMap = new ymaps.Map("map", {
-                center: [55.76, 37.64],
-                zoom: 7
-            });
-        }
-    </script> -->
+    <script defer src="js/companyMenu.js"></script>
 
     <link rel="stylesheet" href="style/company.css">
 </head>
@@ -74,8 +66,14 @@ foreach ($polygons as $polygon) {
 <body>
 
     <div class="container">
+        <hr>
         <h1><?= $data['name_org'] ?></h1>
-
+        <hr>
+        <ul class="info__menu">
+            <li id="info" class="info__menu__item active__menu">Информация</li>
+            <li id="poly" class="info__menu__item">Полигоны</li>
+        </ul>
+        <hr>
         <ul class="info__list">
             <?php
             if ($data['sved_nedr'] != "") {
@@ -217,21 +215,25 @@ foreach ($polygons as $polygon) {
             ?>
 
         </ul>
-        <?php
-        if ($data['geo_coord'] != "") {
-            ?>
-            <hr>
-            <h2 class="coord__title">Координаты полигонов</h2>
-            <hr>
-            <div id="rootCoord" class="coordList">
-
-            </div>
-            <div id="boxMap" class="boxMap">
-
-            </div>
+        <div class="container__coord">
             <?php
-        }
-        ?>
+            if ($data['geo_coord'] != "") {
+                ?>
+                
+                <h2 class="coord__title">Координаты полигонов</h2>
+                <hr>
+                <div id="rootCoord" class="coordList">
+
+                </div>
+                <hr>
+                <div id="boxMap" class="boxMap">
+
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+
 
         <!-- <div id="map-0" style="width: 600px; height: 400px"></div> -->
 

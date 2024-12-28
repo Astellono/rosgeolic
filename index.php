@@ -24,7 +24,7 @@ while ($row = $result->fetch_assoc()) {
     <link rel="stylesheet" href="style/style.css">
     <script>
         let data = <?php echo json_encode($users); ?>;
-
+console.log(data);
     </script>
     <script src="js/renderData.js" defer>
 
@@ -34,8 +34,12 @@ while ($row = $result->fetch_assoc()) {
 <body>
     <h1>База данных</h1>
     <form method="POST" class="input__container" action="">
+    <div class="input__box">
+            <label class="label" for="сompName">Название компании:</label>
+            <input class="input__filter" id="сompName" type="text" name="сompName">
+        </div>
         <div class="input__box">
-            <label class="label" for="gosNumber">Государственный номер:</label>
+            <label class="label" for="gosNumber">Гос номер:</label>
             <input class="input__filter" id="gosInput" type="text" name="gosNumber">
         </div>
         <div class="input__box">
@@ -50,7 +54,8 @@ while ($row = $result->fetch_assoc()) {
     <table id="keywords" class="container">
         <thead>
             <tr>
-                <th scope="col">id</th>
+                <!-- <th scope="col">id</th> -->
+                <th scope="col">Компания</th>
                 <th scope="col">Государственный номер</th>
                 <th scope="col">Дата начала лицензии</th>
                 <th scope="col">Дата окончания лицензии</th>

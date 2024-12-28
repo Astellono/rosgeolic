@@ -6,30 +6,38 @@ function renderData(mass) {
     tbody.innerHTML = '';
     mass.forEach(e => {
         let tr = document.createElement('tr')
-        let td = document.createElement('td')
+        // let td = document.createElement('td')
         let td1 = document.createElement('td')
         let td2 = document.createElement('td')
         let td3 = document.createElement('td')
-
+        let td4 = document.createElement('td')
         // th.setAttribute('scope', 'row')
         tr.classList.add('trData')
-        td.textContent = e.id
-        td1.textContent = e.gos_number
-        td2.textContent = e.date_gosNumber
-        td3.textContent = e.date_finish
-        tr.addEventListener('click', ()=>{
+        // td.textContent = e.id
+        // td1.textContent = e.gos_number
+        // td2.textContent = e.date_gosNumber
+        // td3.textContent = e.date_finish
+        // td4.textContent = e.date_finish
+        td1.style.padding = '20px'
+        // td.textContent = e.id
+        td1.textContent = e.name_org
+        td2.textContent = e.gos_number
+        td3.textContent = e.date_gosNumber
+        td4.textContent = e.date_finish
+        tr.addEventListener('click', () => {
             document.location.href = 'company.php?id=' + e.id;
         })
         tbody.append(tr)
-        tr.append(td)
+        // tr.append(td)
         tr.append(td1)
         tr.append(td2)
         tr.append(td3)
+        tr.append(td4)
     });
 }
 function hiddenList(mass, cnt) {
     let btnOpen = document.getElementById('vievNext')
-   
+
     if (mass.length == 0) {
         btnOpen.style.display = 'none'
     } else btnOpen.style.display = 'block'
@@ -50,13 +58,13 @@ function hiddenList(mass, cnt) {
             btnOpen.style.display = 'block'
 
         } else btnOpen.style.display = 'none'
-      
+
 
     });
 
     btnOpen.addEventListener('click', () => {
         let open = 1;
-      
+
         mass.forEach((e, index) => {
 
 
@@ -69,10 +77,10 @@ function hiddenList(mass, cnt) {
                 btnOpen.style.display = 'block'
 
             } else btnOpen.style.display = 'none'
-          
+
 
         });
-     
+
     })
 }
 
@@ -98,21 +106,23 @@ input.forEach(e => {
 
 function filterArray() {
 
-
+    let name = document.getElementById('сompName').value.toLowerCase();
     let title = document.getElementById('gosInput').value.toLowerCase();
     let startDate = new Date(document.getElementById('dateStartInput').value)
     let endDate = new Date(document.getElementById('dateFinishInput').value)
 
 
     const filteredData = data.filter(item => {
+        console.log(item);
         const itemStartDate = new Date(item.date_gosNumber);
         const itemEndDate = new Date(item.date_finish);
-
+        
+        const matchesName = item.name_org.toLowerCase().includes(name);
         const matchesTitle = item.gos_number.toLowerCase().includes(title);
         const matchesStartDate = isNaN(startDate) || itemStartDate >= startDate;
         const matchesEndDate = isNaN(endDate) || itemEndDate <= endDate;
 
-        return matchesTitle && matchesStartDate && matchesEndDate;
+        return matchesName && matchesTitle && matchesStartDate && matchesEndDate;
     });
 
     renderData(filteredData);
