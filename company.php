@@ -215,7 +215,7 @@ foreach ($polygons as $polygon) {
             ?>
 
         </ul>
-        <div class="container__coord">
+        <div class="container__coord" style="display: none;">
             <?php
             if ($data['geo_coord'] != "") {
                 ?>
