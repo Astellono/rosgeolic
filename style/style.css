@@ -46,6 +46,7 @@
   font-size: 24px;
   color: #4DC3FA;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 input[type="date"] {
@@ -61,7 +62,7 @@ body {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2em;
   font-weight: 300;
   line-height: 1em;
   text-align: center;

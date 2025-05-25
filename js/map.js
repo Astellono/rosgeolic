@@ -4,7 +4,7 @@ ymaps.ready(init);
 
 
 function init() {
-    let arrCoord = paraCoord
+    let arrCoord = decimalCoordinates
     console.log(arrCoord);
     arrCoord.forEach((e, index) => {
         let box = document.getElementById('rootCoord')
@@ -12,7 +12,7 @@ function init() {
         let map = document.createElement('div')
         let btnItem = document.createElement('button')
 
-        btnItem.textContent = 'Точка-' + (index + 1)
+        btnItem.textContent = e.name
         btnItem.classList.add('coord__item')
         box.classList.add('coord__list')
 
@@ -27,10 +27,10 @@ function init() {
 
 
         var myMap = new ymaps.Map("map-" + (index + 1), {
-            center: [e.left, e.right],
+            center: [e.latitude, e.longitude],
             zoom: 12
         });
-        var myPlacemark = new ymaps.Placemark([e.left, e.right], null, {
+        var myPlacemark = new ymaps.Placemark([e.latitude, e.longitude], null, {
             preset: 'islands#blueDotIcon'
         });
         myMap.geoObjects.add(myPlacemark);

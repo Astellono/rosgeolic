@@ -20,12 +20,12 @@ function renderData(mass) {
         // td4.textContent = e.date_finish
         td1.style.padding = '20px'
         // td.textContent = e.id
-        td1.textContent = e.name_org
-        td2.textContent = e.gos_number
+        td1.textContent = e.company_name
+        td2.textContent = e.reg_number
         td3.textContent = e.date_gosNumber
         td4.textContent = e.date_finish
         tr.addEventListener('click', () => {
-            document.location.href = 'company.php?id=' + e.id;
+            document.location.href = 'company.php?licId=' + e.licId + '&authId=' + e.authorityId;
         })
         tbody.append(tr)
         // tr.append(td)
@@ -117,8 +117,8 @@ function filterArray() {
         const itemStartDate = new Date(item.date_gosNumber);
         const itemEndDate = new Date(item.date_finish);
         
-        const matchesName = item.name_org.toLowerCase().includes(name);
-        const matchesTitle = item.gos_number.toLowerCase().includes(title);
+        const matchesName = item.company_name.toLowerCase().includes(name);
+        const matchesTitle = item.reg_number.toLowerCase().includes(title);
         const matchesStartDate = isNaN(startDate) || itemStartDate >= startDate;
         const matchesEndDate = isNaN(endDate) || itemEndDate <= endDate;
 

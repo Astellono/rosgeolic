@@ -3,7 +3,7 @@ require_once 'php/connect.php';
 // require_once 'php/filter.php';
 session_start();
 
-$result = $connect->query("SELECT * from `opendata10`");
+$result = $connect->query("SELECT * from `licenses`");
 $rows = [];
 while ($row = $result->fetch_assoc()) {
     $users[] = $row;
@@ -23,8 +23,30 @@ while ($row = $result->fetch_assoc()) {
     <title>Document</title>
     <link rel="stylesheet" href="style/style.css">
     <script>
-        let data = <?php echo json_encode($users); ?>;
-console.log(data);
+        let data = []
+        <?php 
+        foreach ($users as $user) {
+            
+            ?>
+            data.push({
+                licId:<?= json_encode($user['license_id']) ?>,
+                company_name: <?php
+                
+                $sql = "SELECT `company_name` FROM `subsoilusers` WHERE `user_id` = '{$user['user_id']}'";
+                $result = $connect->query($sql);
+                $nameOrg = $result->fetch_assoc();
+
+                echo json_encode($nameOrg['company_name']);
+                ?>,
+                reg_number:<?= json_encode($user['reg_number']) ?>,
+                date_gosNumber:<?= json_encode($user['issue_date']) ?>,
+                date_finish: <?= json_encode($user['expiration_date']) ?>,
+                authorityId: <?= json_encode($user['authority_id']) ?>
+            })
+            <?php
+        }
+        ?>
+        console.log(data);
     </script>
     <script src="js/renderData.js" defer>
 
@@ -32,7 +54,7 @@ console.log(data);
 </head>
 
 <body>
-    <h1>База данных</h1>
+    <h1>РОСГЕОЛИЦ</h1>
     <form method="POST" class="input__container" action="">
     <div class="input__box">
             <label class="label" for="сompName">Название компании:</label>
@@ -53,7 +75,7 @@ console.log(data);
     </form>
     <table id="keywords" class="container">
         <thead>
-            <tr>
+            <tr style="pointer-events: none;">
                 <!-- <th scope="col">id</th> -->
                 <th scope="col">Компания</th>
                 <th scope="col">Государственный номер</th>
@@ -63,7 +85,7 @@ console.log(data);
         </thead>
         <tbody id="tbody">
 
-
+          
         </tbody>
     </table>
     <button id="vievNext" class="viev__btn">
@@ -75,14 +97,11 @@ console.log(data);
     </ul>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script>
-         let win = open("https://volleymsk.ru/");
-            console.log(win);
-            win.addEventListener("DOMContentLoaded", function (evt)
-            {
-                console.log(win.document.title);
-            });
-    </script>
+   <script>
+    function redir() {
+        
+    }
+   </script>
    
 </body>
 
