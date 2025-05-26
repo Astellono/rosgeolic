@@ -18,7 +18,8 @@ function renderData(mass) {
         // td2.textContent = e.date_gosNumber
         // td3.textContent = e.date_finish
         // td4.textContent = e.date_finish
-        td1.style.padding = '20px'
+        td1.style.textAlign = 'left'
+        td1.style.padding = '10px'
         // td.textContent = e.id
         td1.textContent = e.company_name
         td2.textContent = e.reg_number
