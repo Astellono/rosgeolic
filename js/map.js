@@ -2,68 +2,58 @@
 
 ymaps.ready(init);
 
+function calculateCenter(coordinates) {
+    let latSum = 0;
+    let lonSum = 0;
+    const count = coordinates.length;
 
-function init() {
-    let arrCoord = decimalCoordinates
-    console.log(arrCoord);
-    arrCoord.forEach((e, index) => {
-        let box = document.getElementById('rootCoord')
-        let mapBox = document.getElementById('boxMap')
-        let map = document.createElement('div')
-        let btnItem = document.createElement('button')
-
-        btnItem.textContent = e.name
-        btnItem.classList.add('coord__item')
-        box.classList.add('coord__list')
-
-
-        mapBox.classList.add('boxMap')
-        map.classList.add('map')
-        mapBox.append(map)
-        map.setAttribute('id', 'map-' + (index + 1))
-
-
-        // map.setAttribute('style', 'width: 600px; height: 400px')
-
-
-        var myMap = new ymaps.Map("map-" + (index + 1), {
-            center: [e.latitude, e.longitude],
-            zoom: 12
-        });
-        var myPlacemark = new ymaps.Placemark([e.latitude, e.longitude], null, {
-            preset: 'islands#blueDotIcon'
-        });
-        myMap.geoObjects.add(myPlacemark);
-
-
-
-        btnItem.setAttribute('data-id', 'map-' + (index + 1))
-        btnItem.classList.add('target__btn')
-
-
-        btnItem.addEventListener('click', (e) => {
-            // console.log(e.target.getAttribute('data-id'));
-
-            let mapArr = document.querySelectorAll('.map')
-            mapArr.forEach(el => {
-                el.style.display = 'none'
-            });
-            let activeMap = document.getElementById(e.target.getAttribute('data-id'))
-            activeMap.style.display = 'block'
-        })
-
-
-        box.append(btnItem)
-
+    coordinates.forEach(coord => {
+        latSum += coord[0]; // Широта
+        lonSum += coord[1]; // Долгота
     });
 
-    let itemBtn = document.querySelectorAll('.coord__item')
-    let listBtn = document.getElementById('rootCoord')
-    console.log(listBtn);
-    console.log(itemBtn.length);
-    if (itemBtn.length < 6) {
-        listBtn.classList.add('coord__listFlexC')
-    } 
+    return [latSum / count, lonSum / count];
+}
+
+function init() {
+
+    let arrCoord = decimalCoordinates
+    let arrPoints = []
+
+    arrCoord.forEach((e, index) => {
+        arrPoints.push([e.latitude, e.longitude])
+    });
+
+
+    if (arrPoints.length > 0) {
+        arrPoints.push([arrCoord[0].latitude, arrCoord[0].longitude]);
+    }
+    const center = calculateCenter(arrPoints);
+    console.log(center);
+
+    var map = new ymaps.Map("map", {
+        center: center, // Москва
+        zoom: 11
+    });
+
+
+
+
+    var polygon = new ymaps.Polygon(
+        [arrPoints], // Массив координат
+        {
+            hintContent: "Мой полигон", // Подсказка
+            balloonContent: "Это полигон на Яндекс Картах" // Балун
+        },
+        {
+            fillColor: '#FF0000', // Цвет заливки
+            strokeColor: '#0000FF', // Цвет обводки
+            opacity: 0.5, // Прозрачность
+            strokeWidth: 2 // Толщина обводки
+        }
+    );
+    map.geoObjects.add(polygon);
+
 }
 
 

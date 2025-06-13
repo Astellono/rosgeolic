@@ -120,7 +120,7 @@ $geoCoord = $dataLic['geo_coord'];
             <?php
                 if ($dataLic['geo_coord'] != "") {
                 ?>
-            <li id="poly" class="info__menu__item">Полигоны</li>
+            <li id="poly" class="info__menu__item">Полигон</li>
 
                <?php
             }
@@ -268,15 +268,10 @@ $geoCoord = $dataLic['geo_coord'];
             if ($dataLic['geo_coord'] != "") {
                 ?>
 
-                <h2 class="coord__title">Координаты полигонов</h2>
-                <hr>
-                <div id="rootCoord" class="coordList">
+                
 
-                </div>
-                <hr>
-                <div id="boxMap" class="boxMap">
-
-                </div>
+              
+                <div id="map" style="max-width: 600px; height: 400px; margin: 20px auto"></div>
                 <?php
             }
             ?>
